@@ -6,9 +6,10 @@ until pg_isready -h db -U user; do
   sleep 2
 done
 
-# Apply migrations or other database setup if necessary (e.g., using alembic)
-# Example:
+# Create database and apply migrations if needed
+echo "Creating database and applying migrations..."
+psql -h db -U user -d postgres -c "CREATE DATABASE arxiv;"
+# Example: Run database migrations with alembic
 # alembic upgrade head
 
-# Start the FastAPI application
-exec uvicorn app.main:app --host 0.0.0.0 --port 8000
+echo "Database initialization complete."

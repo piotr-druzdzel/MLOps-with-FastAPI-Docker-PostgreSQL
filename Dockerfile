@@ -11,8 +11,12 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-# Custom script to wait for PostgreSQL to be ready before starting the application
+# Copy initialization script
 COPY init-db.sh /app/init-db.sh
 RUN chmod +x /app/init-db.sh
 
-CMD ["./init-db.sh"]
+# Startup script
+COPY start.sh /app/start.sh
+RUN chmod +x /app/start.sh
+
+CMD ["./start.sh"]
